@@ -2,19 +2,72 @@
   text-align: center;
 }
 
+.App {
+  text-align: center;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+/* Global font */
+html, body, .App, .App-header, button, input, label, p, h1, h2, h3, small {
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+  width: 20px !important;
+  height: 20px !important;
+  accent-color: #2bdc76;
+  cursor: pointer;
+  appearance: auto !important;
+  -webkit-appearance: checkbox !important;
+  -moz-appearance: checkbox !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline-block !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 3px !important;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #2bdc76 !important;
+  border-color: #2bdc76 !important;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✓" !important;
+  color: white !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  display: block !important;
+  text-align: center !important;
+  line-height: 16px !important;
+}
+
 .App-logo {
   height: 40vmin;
-  pointer-events: none;
+  /* enable hover detection */
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.45));
+  transition: filter 160ms ease;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+  .App-logo:hover {
+    animation-duration: 5s;
+    /* stronger multi-layer glow */
+    filter:
+      drop-shadow(0 0 18px rgba(255, 255, 255, 0.95))
+      drop-shadow(0 0 36px rgba(255, 255, 255, 0.75))
+      drop-shadow(0 0 64px rgba(255, 255, 255, 0.55));
+  }
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: transparent;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,6 +75,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.app-description {
+  font-family: 'Orbitron', sans-serif;
 }
 
 .App-link {
@@ -35,4 +92,224 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Primary button styling */
+.primary-button {
+  padding: 25px 50px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: background 160ms ease, box-shadow 160ms ease, transform 80ms ease;
+  backdrop-filter: blur(2px);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.primary-button:hover {
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
+}
+
+.primary-button:active {
+  transform: translateY(1px);
+}
+
+.primary-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(97, 218, 251, 0.35);
+}
+
+/* Modal dialog */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.modal-card {
+  width: 92%;
+  max-width: 560px;
+  background: rgba(20, 24, 37, 0.9);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  padding: 20px;
+  max-height: 80vh;
+  overflow: auto;
+  opacity: 0;
+  transform: translateY(8px) scale(0.98);
+  transition: opacity 200ms ease, transform 240ms ease;
+}
+
+.modal-card h2 {
+  margin: 0 0 8px 0;
+  font-size: 22px;
+}
+
+.modal-actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Visible states */
+.modal-backdrop.show {
+  opacity: 1;
+}
+
+.modal-card.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Modal content layout: 3 vertical buttons */
+.modal-grid {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.file-trigger {
+  width: 100%;
+}
+
+.hidden-input {
+  display: none;
+}
+
+/* Square card styling for file selectors */
+.file-card {
+  width: 100%;
+  min-height: 180px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  overflow: visible;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.file-card .primary-button.file-trigger {
+  flex: 1;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.file-card:hover {
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.file-card.selected {
+  border-color: #2bdc76;
+  box-shadow: 0 0 0 2px rgba(43, 220, 118, 0.35), 0 10px 26px rgba(43, 220, 118, 0.35);
+}
+
+/* Error state for missing files */
+.file-card.error {
+  border-color: #ff4d4f;
+  box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.45), 0 10px 26px rgba(255, 77, 79, 0.35);
+}
+
+/* Clear (remove) button */
+.clear-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
+  z-index: 2;
+}
+
+.clear-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+
+.error-text {
+  color: #ffb3b3;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Submit button shake */
+@keyframes btn-shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+
+.submit-button.shake {
+  animation: btn-shake 400ms ease;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top: 4px solid #2bdc76;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Progress bar */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2bdc76, #61dafb);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px rgba(43, 220, 118, 0.4);
 }
