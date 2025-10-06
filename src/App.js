@@ -60,7 +60,7 @@ function App() {
   }, []);
 
   const apiUrl = useMemo(() => {
-    const base = process.env.REACT_APP_API_BASE_URL || '';
+    const base = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
     return `${base}/api/upload`;
   }, []);
 
@@ -184,7 +184,7 @@ function App() {
       const { job_id, status_url, download_url } = res.data;
       
       // Add base URL to relative URLs
-      const baseUrl = process.env.REACT_APP_API_BASE_URL || '';
+      const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
       const fullStatusUrl = status_url.startsWith('http') ? status_url : `${baseUrl}${status_url}`;
       const fullDownloadUrl = download_url.startsWith('http') ? download_url : `${baseUrl}${download_url}`;
       
