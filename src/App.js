@@ -60,14 +60,14 @@ function App() {
   }, []);
 
   const apiUrl = useMemo(() => {
-    const base = 'http://ec2-54-151-59-221.us-west-1.compute.amazonaws.com:8000';
+    const base = 'https://ec2-54-151-59-221.us-west-1.compute.amazonaws.com:8000';
     return `${base}/api/upload`;
   }, []);
 
   // Health check test on component mount
   useEffect(() => {
     const testBackendConnection = async () => {
-      const baseUrl = 'http://ec2-54-151-59-221.us-west-1.compute.amazonaws.com:8000';
+      const baseUrl = 'https://ec2-54-151-59-221.us-west-1.compute.amazonaws.com:8000';
       const healthUrl = `${baseUrl}/health`;
       
       console.log('🔍 Testing backend connection...');
@@ -184,7 +184,7 @@ function App() {
       const { job_id, status_url, download_url } = res.data;
       
       // Add base URL to relative URLs
-      const baseUrl = 'http://ec2-54-151-59-221.us-west-1.compute.amazonaws.com:8000';
+      const baseUrl = 'https://ec2-54-151-59-221.us-west-1.compute.amazonaws.com:8000';
       const fullStatusUrl = status_url.startsWith('http') ? status_url : `${baseUrl}${status_url}`;
       const fullDownloadUrl = download_url.startsWith('http') ? download_url : `${baseUrl}${download_url}`;
       
