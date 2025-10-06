@@ -11,7 +11,7 @@ function Results({ jobId }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
+  const apiBaseUrl = 'http://ec2-54-151-59-221.us-west-1.compute.amazonaws.com:8000';
 
   /**
    * Parses CSV text data into an array of objects

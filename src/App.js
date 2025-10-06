@@ -60,14 +60,14 @@ function App() {
   }, []);
 
   const apiUrl = useMemo(() => {
-    const base = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
+    const base = 'http://ec2-54-151-59-221.us-west-1.compute.amazonaws.com:8000';
     return `${base}/api/upload`;
   }, []);
 
   // Health check test on component mount
   useEffect(() => {
     const testBackendConnection = async () => {
-      const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
+      const baseUrl = 'http://ec2-54-151-59-221.us-west-1.compute.amazonaws.com:8000';
       const healthUrl = `${baseUrl}/health`;
       
       console.log('🔍 Testing backend connection...');
@@ -184,7 +184,7 @@ function App() {
       const { job_id, status_url, download_url } = res.data;
       
       // Add base URL to relative URLs
-      const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
+      const baseUrl = 'http://ec2-54-151-59-221.us-west-1.compute.amazonaws.com:8000';
       const fullStatusUrl = status_url.startsWith('http') ? status_url : `${baseUrl}${status_url}`;
       const fullDownloadUrl = download_url.startsWith('http') ? download_url : `${baseUrl}${download_url}`;
       
@@ -487,7 +487,8 @@ function App() {
             <h2>Processing Your Data</h2>
             <div style={{ textAlign: 'center', padding: '40px 20px' }}>
               <div className="loading-spinner"></div>
-              <p style={{ marginTop: 20, fontSize: 16 }}>Analyzing exoplanet candidates...</p>
+              <p style={{ marginTop: 20, fontSize: 16, fontWeight: 'bold', color: '#ffffff' }}>Please wait...</p>
+              <p style={{ marginTop: 8, fontSize: 14, opacity: 0.8 }}>Analyzing exoplanet candidates...</p>
               
               {progress && (
                 <div style={{ marginTop: 20, width: '100%' }}>

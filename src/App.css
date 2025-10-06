@@ -139,7 +139,7 @@ input[type="checkbox"]:checked::after {
 .modal-card {
   width: 92%;
   max-width: 560px;
-  background: rgba(20, 24, 37, 0.9);
+  background: rgba(20, 24, 37, 0.95);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 14px;
