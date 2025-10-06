@@ -64,6 +64,45 @@ function App() {
     return `${base}/api/upload`;
   }, []);
 
+  // Health check test on component mount
+  useEffect(() => {
+    const testBackendConnection = async () => {
+      const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
+      const healthUrl = `${baseUrl}/health`;
+      
+      console.log('🔍 Testing backend connection...');
+      console.log('📍 Health check URL:', healthUrl);
+      console.log('🌐 API Base URL:', baseUrl);
+      
+      try {
+        const response = await axios.get(healthUrl, { timeout: 5000 });
+        console.log('✅ Backend health check SUCCESS:', response.data);
+        console.log('📊 Response status:', response.status);
+        console.log('📋 Response headers:', response.headers);
+      } catch (error) {
+        console.error('❌ Backend health check FAILED:');
+        console.error('🚨 Error message:', error.message);
+        console.error('📊 Error status:', error.response?.status);
+        console.error('📋 Error data:', error.response?.data);
+        console.error('🔗 Requested URL:', healthUrl);
+        console.error('⏱️ Timeout:', error.code === 'ECONNABORTED' ? 'Request timed out' : 'No timeout');
+        
+        if (error.code === 'ECONNREFUSED') {
+          console.error('🔌 Connection refused - Backend server is not running on port 8000');
+        } else if (error.code === 'ECONNABORTED') {
+          console.error('⏰ Request timeout - Backend is not responding');
+        } else if (error.response?.status === 404) {
+          console.error('🔍 404 Not Found - Health endpoint not found');
+        } else if (error.response?.status >= 500) {
+          console.error('💥 Server Error - Backend has internal issues');
+        }
+      }
+    };
+
+    // Run health check after a short delay
+    setTimeout(testBackendConnection, 2000);
+  }, []);
+
   // Removed legacy CSV upload handlers
 
   useEffect(() => {

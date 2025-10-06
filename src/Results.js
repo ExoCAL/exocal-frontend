@@ -11,7 +11,7 @@ function Results({ jobId }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || '';
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
 
   /**
    * Parses CSV text data into an array of objects
